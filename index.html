@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF--8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>GelArte Gourmet - Gelatinas y Bebidas Probióticas</title>
 
@@ -28,7 +28,7 @@
       background-color: var(--bg);
       color: var(--text);
       line-height: 1.6;
-      position: relative; /* Necesario para que el z-index funcione correctamente */
+      position: relative; 
     }
     
     body.home-bg::before {
@@ -49,7 +49,7 @@
     header {
       backdrop-filter: blur(10px);
       background: rgba(255, 248, 240, 0.8);
-      padding: 1rem 2rem; /* Reducido para mejor ajuste */
+      padding: 1rem 2rem;
       position: sticky;
       top: 0;
       display: flex;
@@ -66,12 +66,12 @@
       text-decoration: none;
       color: var(--accent);
       font-weight: bold;
-      font-size: 1.6rem; /* Ajustado */
+      font-size: 1.6rem;
       cursor: pointer;
-      z-index: 1001; /* Para que quede sobre el menú móvil */
+      z-index: 1001;
     }
     .logo img {
-      height: 40px; /* Ajustado */
+      height: 40px;
     }
 
     nav { position: relative; margin-left: auto; }
@@ -103,90 +103,19 @@
       padding: 0.5rem 0;
       border-radius: 0.5rem;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      min-width: 200px;
     }
     nav li:hover > ul { display: block; }
     nav ul ul li { padding: 0.5rem 1rem; white-space: nowrap; }
     nav ul ul li a:hover { color: var(--accent); }
 
     .menu-toggle {
-      display: none; /* Oculto en PC por defecto */
+      display: none;
       font-size: 2rem;
       cursor: pointer;
       color: var(--text);
-      order: 3;
-      margin-left: 1rem;
-      z-index: 1001; /* Para que quede sobre el menú móvil */
+      z-index: 1001;
     }
-
-    /* --- INICIO: CORRECCIONES PARA MENÚ MÓVIL --- */
-    @media (max-width: 768px) {
-      header {
-        flex-wrap: wrap;
-        padding: 1rem 1.5rem;
-      }
-      
-      .menu-toggle {
-        display: block; /* Hacemos visible el botón de hamburguesa */
-      }
-      
-      nav {
-        order: 4; /* El menú irá al final del flujo */
-        width: 100%;
-        margin: 0;
-      }
-      
-      nav ul {
-        display: none; /* Ocultamos el menú por defecto */
-        flex-direction: column;
-        width: 100%;
-        position: absolute; /* Lo sacamos del flujo normal */
-        top: 65px; /* Altura del header */
-        left: 0;
-        background: var(--bg); /* Fondo sólido para que no se transparente */
-        padding: 1rem 0;
-        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-      }
-
-      nav ul.show {
-        display: flex; /* Mostramos el menú cuando se hace clic */
-      }
-      
-      nav ul li {
-        text-align: center;
-        width: 100%;
-      }
-      
-      nav ul a {
-        padding: 1rem;
-        display: block; /* Hacemos que el enlace ocupe todo el espacio del 'li' */
-      }
-
-      /* Estilos para los submenús en móvil */
-      nav ul ul {
-        position: static; /* Quitamos posicionamiento absoluto */
-        box-shadow: none;
-        background: var(--neutral-light); /* Un color de fondo para diferenciarlo */
-        border-radius: 0;
-        padding: 0;
-        margin-top: 0.5rem;
-      }
-      
-      nav ul ul li a {
-        font-size: 1rem;
-        padding: 0.75rem 1rem;
-      }
-
-      /* Desactivamos el hover y lo preparamos para el clic */
-      nav li:hover > ul {
-        display: none;
-      }
-      
-      /* Esta clase la añadirá el JS para mostrar el submenú */
-      nav li.submenu-open > ul {
-        display: block;
-      }
-    }
-    /* --- FIN: CORRECCIONES PARA MENÚ MÓVIL --- */
 
     .home-video-wrapper {
         display: flex;
@@ -269,24 +198,6 @@
         width: auto;
     }
 
-    @media (max-width: 1024px) {
-        .side-logo {
-            display: none;
-        }
-    }
-    @media (max-width: 768px) {
-        .home-info-grid {
-            flex-direction: column;
-            text-align: center;
-        }
-        .home-info-text, .home-info-image {
-            text-align: center;
-        }
-        .reconocimientos-logos {
-            justify-content: center;
-        }
-    }
-    
     .home-content-section {
         padding: 1.5rem 2rem;
         text-align: center;
@@ -477,7 +388,7 @@
       background: rgba(92, 58, 33, 0.8);
       justify-content: center;
       align-items: center;
-      padding: 2rem;
+      padding: 1rem;
       overscroll-behavior: contain;
     }
     .modal-content {
@@ -485,7 +396,7 @@
       border: 1px solid rgba(0,0,0,0.08);
       border-radius: 1rem;
       max-width: 980px;
-      width: 96%;
+      width: 100%;
       max-height: 90vh;
       display: grid;
       grid-template-columns: 1.2fr 1fr;
@@ -551,14 +462,6 @@
     }
     .close:hover { background: rgba(0,0,0,0.2); }
 
-    @media (max-width: 900px) {
-      .modal-content {
-        grid-template-columns: 1fr;
-        max-height: 92vh;
-      }
-      .modal-content img { max-height: 35vh; }
-    }
-
     .catalog-wrapper {
       max-width: 904px;
       margin-left: auto;
@@ -600,7 +503,7 @@
     }
     .product-catalog .card h4 {
       font-size: 1.25rem;
-      min-height: 40px; /* Asegura que los botones se alineen */
+      min-height: 40px; 
       margin: 0;
     }
     .product-catalog .card .btn-secondary,
@@ -608,20 +511,39 @@
         font-size: 1rem;
         padding: 0.7rem 1rem;
     }
-
-    /* INICIO: AJUSTE PARA ALINEACIÓN DE KITS */
     .kits-catalog .card img {
         object-fit: contain; 
-        height: 220px; /* Altura fija para todas las imágenes de los kits */
+        height: 220px;
     }
-    /* FIN: AJUSTE */
     
+    /* INICIO: REFACTORIZACIÓN COMPLETA PARA MÓVIL (GELAVASITO) */
+    .gelavasito-header-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .gelavasito-header-container .title-container h2 {
+        font-size: 2.8rem;
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .gelavasito-header-container .title-container p {
+        font-size: 1.2rem;
+        text-align: center;
+        max-width: 450px;
+        margin: 0 auto;
+    }
+
+    /* Contenedor desktop que usa posicionamiento absoluto */
     .posicionamiento-contenedor {
       position: relative;
       height: 180px;
       margin-bottom: 4rem;
     }
-
     #titulo-vasito {
       position: absolute;
       width: 500px;
@@ -629,21 +551,13 @@
       top: 0px;
       left: 300px; 
     }
-    
     #info-pedidos-vasito {
       position: absolute;
       width: 300px;
       top: 30px;
       right: 0px; 
     }
-
-    @media (max-width: 992px) {
-      .catalog-wrapper { max-width: 592px; }
-    }
-    @media (max-width: 640px) {
-      .catalog-wrapper { max-width: 280px; }
-      h3.catalog-heading { text-align: center; }
-    }
+    /* FIN: REFACTORIZACIÓN */
 
     .info-box {
       background: var(--neutral-light);
@@ -671,7 +585,6 @@
       margin-bottom: 0.25rem;
     }
 
-    /* INICIO: Estilos para la nueva sección de Fermentación */
     .fermentation-info-container {
         max-width: 900px;
         margin: 4rem auto 0;
@@ -701,35 +614,26 @@
       height: 20px;
       background-color: var(--accent);
       border-radius: 50%;
-      flex-shrink: 0; /* Evita que el círculo se deforme */
+      flex-shrink: 0;
     }
     .fermentation-card .title h4 {
         font-size: 1.4rem;
         color: var(--text);
         margin: 0;
     }
-    /* INICIO: AJUSTE PARA JUSTIFICACIÓN DE TEXTO */
     .fermentation-card p {
         margin: 0;
-        text-align: justify; /* Texto justificado */
+        text-align: justify;
         max-width: none;
         font-size: 1.05rem;
-        font-weight: normal; /* Asegura que el texto base no sea negrita */
+        font-weight: normal;
     }
-    /* FIN: AJUSTE */
-    @media (max-width: 768px) {
-        .fermentation-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-    /* FIN: Estilos para la nueva sección de Fermentación */
     
-    /* INICIO: Estilos para la sección Nuestra Historia */
     .historia-container {
       display: grid;
-      grid-template-columns: 1.2fr 2fr; /* <-- CORRECCIÓN: Columna de imagen un poco más ancha */
+      grid-template-columns: 1.2fr 2fr;
       gap: 2.5rem;
-      align-items: center; /* <-- CORRECCIÓN: Centrar verticalmente los elementos */
+      align-items: center;
       margin-top: 2rem;
       margin-bottom: 3rem;
     }
@@ -741,16 +645,16 @@
 
     .historia-main-img img {
       width: 100%;
-      height: auto; /* <-- CORRECCIÓN: Dejar que la altura se ajuste a la proporción */
-      object-fit: contain; /* <-- CORRECCIÓN: Asegurar que toda la imagen sea visible */
+      height: auto;
+      object-fit: contain;
       border-radius: 1rem;
       box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-      display: block; /* Asegura que la imagen se comporte como un bloque */
+      display: block;
     }
 
     .historia-text p {
-      margin: 0 0 1rem 0; /* Espacio entre párrafos */
-      max-width: none; /* Anular el max-width general de 'section p' */
+      margin: 0 0 1rem 0;
+      max-width: none;
       text-align: justify;
     }
     .historia-text p:last-child {
@@ -765,27 +669,12 @@
 
     .historia-gallery img {
       width: 100%;
-      height: 250px; /* Altura fija para que se vean uniformes */
+      height: 250px;
       object-fit: contain; 
       border-radius: 1rem;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
     
-    @media (max-width: 768px) {
-      .historia-container {
-        grid-template-columns: 1fr; /* Apila la imagen y el texto */
-        gap: 2rem;
-      }
-      .historia-gallery {
-        grid-template-columns: 1fr; /* Apila las imágenes de la galería */
-        gap: 1rem;
-      }
-      .historia-gallery img {
-        height: auto; /* Altura automática en móvil */
-      }
-    }
-    /* FIN: Estilos para la sección Nuestra Historia */
-
     .cart-container {
       position: relative;
       z-index: 1000;
@@ -796,11 +685,6 @@
       color: var(--text);
       cursor: pointer;
       position: relative;
-      background: transparent;
-      padding: 0;
-      border-radius: 0;
-      backdrop-filter: none;
-      box-shadow: none;
     }
     .cart-count {
       position: absolute;
@@ -833,7 +717,7 @@
       list-style: none;
       padding: 0;
       margin: 0;
-      max-height: 165px;
+      max-height: 200px;
       overflow-y: auto;
     }
     #cart-items li {
@@ -886,7 +770,7 @@
       justify-content: center;
       gap: 1rem;
       margin-top: 2rem;
-      padding: 0 2rem;
+      padding: 0 1rem;
     }
     .galeria-grid .card {
         width: 320px;
@@ -921,97 +805,59 @@
         padding-right: 0;
     }
 
+    /* INICIO: REFACTORIZACIÓN COMPLETA PARA MÓVIL (GELAS DECORADAS) */
+    .decoradas-header-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 0 1rem;
+    }
+    .decoradas-header-container .texto-movible {
+      order: 1; /* El texto va primero */
+      width: 100%;
+      max-width: 500px;
+    }
+    .decoradas-header-container .infobox-movible {
+      order: 2; /* El info box va segundo */
+      width: 100%;
+      max-width: 380px;
+      margin: 0;
+    }
+    .decoradas-header-container .texto-movible h2,
+    .decoradas-header-container .texto-movible p {
+      text-align: center;
+    }
+    /* Contenedor desktop que usa posicionamiento absoluto */
     .contenedor-posicionamiento-absoluto {
         position: relative;
         width: 100%;
         min-height: 200px; 
     }
+    #texto-p1-movible, #texto-p2-movible, #texto-p3-movible {
+        position: absolute; max-width: 500px; z-index: 5;
+    }
+    #infobox-p1-movible, #infobox-p2-movible, #infobox-p3-movible {
+        position: absolute; max-width: 340px; z-index: 5;
+    }
+    #texto-p1-movible { top: 0.5rem; left: 30vw; }
+    #infobox-p1-movible { top: 0rem; right: 6vw; }
+    #texto-p2-movible { top: 0.5rem; left: 30vw; }
+    #infobox-p2-movible { top: 1.75rem; right: 4vw; }
+    #texto-p3-movible { top: 0.8rem; left: 30vw; }
+    #infobox-p3-movible { top: 0.8rem; right: 5vw; }
+    /* FIN: REFACTORIZACIÓN */
 
-    #texto-p1-movible,
-    #texto-p2-movible,
-    #texto-p3-movible {
-        position: absolute;
-        max-width: 500px;
-        width: 80%;
-        z-index: 5;
-    }
-    #texto-p1-movible h2, #texto-p1-movible p,
-    #texto-p2-movible h2, #texto-p2-movible p,
-    #texto-p3-movible h2, #texto-p3-movible p {
-        text-align: center;
-    }
-    
-    #infobox-p1-movible,
-    #infobox-p2-movible,
-    #infobox-p3-movible {
-        position: absolute;
-        width: auto;
-        max-width: 340px;
-        z-index: 5;
-    }
-
-    #texto-p1-movible {
-        top: 0.5rem;
-        left: 30vw;
-    }
-    #infobox-p1-movible {
-        top: 0rem;
-        right: 6vw;
-    }
-
-    #texto-p2-movible {
-        top: 0.5rem;
-        left: 30vw;
-    }
-    #infobox-p2-movible {
-        top: 1.75rem;
-        right: 4vw;
-    }
-
-    #texto-p3-movible {
-        top: 0.8rem;
-        left: 30vw;
-    }
-    #infobox-p3-movible {
-        top: 0.8rem;
-        right: 5vw;
-    }
-
-
-    @media (max-width: 768px) {
-        .contenedor-posicionamiento-absoluto {
-            min-height: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
-        }
-        #texto-p1-movible, #infobox-p1-movible,
-        #texto-p2-movible, #infobox-p2-movible,
-        #texto-p3-movible, #infobox-p3-movible {
-            position: static; 
-            width: 100%;
-            max-width: 100%;
-            text-align: center;
-        }
-         #texto-p1-movible h2, #texto-p1-movible p,
-         #texto-p2-movible h2, #texto-p2-movible p,
-         #texto-p3-movible h2, #texto-p3-movible p {
-            text-align: center;
-        }
-    }
     .probiotics-catalog .probiotic-description {
         text-align: left !important;
         max-width: none !important;
         margin-bottom: 1.5rem !important;
         font-size: 1.1rem;
     }
-
     .probiotics-catalog .card {
         width: 340px;
         justify-content: flex-start;
     }
-
     .probiotics-catalog .card img {
         width: 100%;
         max-height: 250px;
@@ -1019,12 +865,7 @@
         cursor: default;
         margin-bottom: 1rem; 
     }
-
-    .probiotics-catalog .card-content {
-        flex-grow: 0; 
-        margin-bottom: 1rem; 
-    }
-
+    .probiotics-catalog .card-content { flex-grow: 0; margin-bottom: 1rem; }
     .probiotics-catalog .card h4.probiotic-size {
         font-size: 1.8rem;
         font-weight: bold;
@@ -1032,7 +873,6 @@
         margin: 0;
         min-height: 0; 
     }
-    
     .probiotics-catalog .card p.probiotic-price {
         font-size: 1.4rem;
         color: var(--accent);
@@ -1041,25 +881,14 @@
         padding: 0; 
         margin-bottom: 0;
     }
-
     .probiotics-catalog .action-btn {
         width: 100%;
         padding: 0.8rem 1.5rem;
         font-size: 1.1rem;
     }
 
-    /* --- INICIO: ESTILOS PARA CURSO CON TEXTO MÁS GRANDE --- */
-    .curso-v2-section {
-        padding: 0; 
-        max-width: none; 
-    }
-
-    .curso-v2-hero {
-        background-color: #1a1a1a;
-        padding: 4rem 2rem;
-        text-align: center;
-    }
-    
+    .curso-v2-section { padding: 0; max-width: none; }
+    .curso-v2-hero { background-color: #1a1a1a; padding: 4rem 2rem; text-align: center; }
     .curso-v2-video-wrapper {
         max-width: 900px;
         margin: 0 auto;
@@ -1070,134 +899,70 @@
         border: 4px solid var(--text);
         background-color: #000;
     }
-
-    .curso-v2-video-wrapper iframe {
-        width: 100%;
-        height: 100%;
-        border: 0;
-    }
-
-    .curso-v2-content-wrapper {
-        padding: 5rem 2rem;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-
+    .curso-v2-video-wrapper iframe { width: 100%; height: 100%; border: 0; }
+    .curso-v2-content-wrapper { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
     .curso-v2-intro {
         display: grid;
         grid-template-columns: 2fr 1fr;
-        gap: 4rem; /* Aumentado */
+        gap: 4rem;
         align-items: center;
-        margin-bottom: 5rem; /* Aumentado */
+        margin-bottom: 5rem;
     }
-
     .curso-v2-intro h1 {
         font-family: 'Lora', serif;
-        font-size: 4rem; /* Aumentado */
+        font-size: 4rem;
         color: var(--text);
         margin-top: 0;
-        margin-bottom: 1.5rem; /* Aumentado */
+        margin-bottom: 1.5rem;
         line-height: 1.2;
     }
-
     .curso-v2-intro p {
-        font-size: 1.4rem; /* Aumentado */
+        font-size: 1.4rem;
         text-align: left;
         max-width: none;
         margin-bottom: 0;
-        line-height: 1.7; /* Aumentado */
+        line-height: 1.7;
     }
-
     .curso-v2-cta-card {
         background: var(--neutral-light);
-        padding: 2.5rem; /* Aumentado */
+        padding: 2.5rem;
         border-radius: 1rem;
         text-align: center;
         box-shadow: 0 8px 16px rgba(0,0,0,0.05);
     }
-    
     .curso-v2-cta-card .price {
-        font-size: 3rem; /* Aumentado */
+        font-size: 3rem;
         font-weight: 700;
         color: var(--accent);
         margin: 0 0 0.5rem 0;
     }
-    
     .curso-v2-cta-card .price-meta {
-        font-size: 1.1rem; /* Aumentado */
+        font-size: 1.1rem;
         color: var(--neutral-dark);
         margin-bottom: 1.5rem;
     }
-
-    .curso-v2-cta-card .pill {
-        width: 100%;
-        font-size: 1.3rem; /* Aumentado */
-        padding: 1.2rem;
-    }
-    .curso-v2-cta-card .pill i {
-        margin-right: 0.5rem;
-    }
-
-    .curso-v2-details-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 4rem; /* Aumentado */
-    }
-
+    .curso-v2-cta-card .pill { width: 100%; font-size: 1.3rem; padding: 1.2rem; }
+    .curso-v2-cta-card .pill i { margin-right: 0.5rem; }
+    .curso-v2-details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
     .curso-v2-details-grid h3 {
         font-family: 'Lora', serif;
-        font-size: 2.2rem; /* Aumentado */
+        font-size: 2.2rem;
         color: var(--text);
         text-align: left;
         margin-top: 0;
-        margin-bottom: 2rem; /* Aumentado */
+        margin-bottom: 2rem;
     }
-    
-    .temario-v2-list, .features-v2-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        text-align: left;
-    }
-
+    .temario-v2-list, .features-v2-list { list-style: none; padding: 0; margin: 0; text-align: left; }
     .temario-v2-list li, .features-v2-list li {
         display: flex;
         align-items: start;
         gap: 1rem;
-        margin-bottom: 1.25rem; /* Aumentado */
-        font-size: 1.15rem; /* Aumentado */
+        margin-bottom: 1.25rem;
+        font-size: 1.15rem;
     }
-
-    .temario-v2-list i, .features-v2-list i {
-        color: var(--accent);
-        margin-top: 6px; /* Ajustado */
-    }
-
-    .features-v2-list strong {
-        display: block;
-        color: var(--text);
-        margin-bottom: 0.25rem;
-    }
+    .temario-v2-list i, .features-v2-list i { color: var(--accent); margin-top: 6px; }
+    .features-v2-list strong { display: block; color: var(--text); margin-bottom: 0.25rem; }
     
-    @media (max-width: 900px) {
-        .curso-v2-intro {
-            grid-template-columns: 1fr;
-            gap: 2.5rem;
-        }
-        .curso-v2-details-grid {
-            grid-template-columns: 1fr;
-        }
-        .curso-v2-intro h1 {
-            font-size: 3rem; /* Ajustado para móvil */
-            text-align: center;
-        }
-        .curso-v2-intro p {
-            text-align: center;
-        }
-    }
-    /* --- FIN: ESTILOS PARA CURSO CON TEXTO MÁS GRANDE --- */
-
-    /* INICIO: Estilos para botón flotante de WhatsApp */
     .whatsapp-flotante {
       position: fixed;
       width: 60px;
@@ -1217,10 +982,147 @@
       text-decoration: none;
       transition: transform 0.3s ease;
     }
-    .whatsapp-flotante:hover {
-      transform: scale(1.1);
+    .whatsapp-flotante:hover { transform: scale(1.1); }
+
+
+    /* -------------------------------------------------- */
+    /* --- INICIO: MEDIA QUERIES PARA RESPONSIVIDAD --- */
+    /* -------------------------------------------------- */
+
+    /* Para tablets y dispositivos más pequeños */
+    @media (max-width: 1024px) {
+      .side-logo {
+        display: none;
+      }
+      .posicionamiento-contenedor,
+      .contenedor-posicionamiento-absoluto {
+        display: none; /* Ocultamos el contenedor de escritorio */
+      }
     }
-    /* FIN: Estilos para botón flotante de WhatsApp */
+    
+    /* Para móviles */
+    @media (max-width: 768px) {
+      section {
+        padding: 2.5rem 1rem;
+      }
+
+      header {
+        flex-wrap: wrap;
+        padding: 1rem 1.5rem;
+        justify-content: space-between;
+      }
+      
+      .logo {
+        order: 1;
+        font-size: 1.3rem;
+      }
+      .logo span { display: none; }
+      .cart-container { order: 2; margin-left: 0;}
+      .menu-toggle { order: 3; display: block; margin-left: 1rem;}
+      nav { order: 4; width: 100%; margin: 0;}
+      
+      nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 65px; /* Altura del header */
+        left: 0;
+        background: var(--bg);
+        padding: 1rem 0;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      }
+      nav ul.show { display: flex; }
+      nav ul li { text-align: center; width: 100%; }
+      nav ul a { padding: 1rem; display: block; }
+      nav ul ul {
+        position: static;
+        box-shadow: none;
+        background: var(--neutral-light);
+        border-radius: 0;
+        padding: 0;
+        margin-top: 0.5rem;
+      }
+      nav ul ul li a { font-size: 1rem; padding: 0.75rem 1rem; }
+      nav li:hover > ul { display: none; }
+      nav li.submenu-open > ul { display: block; }
+
+      .home-info-grid {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+      }
+      .home-info-text, .home-info-image {
+        text-align: center;
+      }
+      .home-info-image img { margin: 0 auto; }
+      .reconocimientos-logos { justify-content: center; }
+
+      .home-content-section h2 { font-size: 2.5rem; }
+      .home-content-section p { font-size: 1.1rem; }
+      .pill { font-size: 1rem; padding: 0.8rem 1.5rem; }
+      
+      .modal-content {
+        grid-template-columns: 1fr;
+        max-height: 92vh;
+        padding: 1rem;
+        gap: 1rem;
+      }
+      .modal-img-wrap { order: 1; }
+      .modal-body { order: 2; }
+      .modal-content img { max-height: 35vh; }
+      .close { top: 8px; right: 8px; }
+
+      .cart-dropdown {
+          width: 90vw;
+          max-width: 350px;
+      }
+
+      .catalog-wrapper { max-width: 592px; }
+      h3.catalog-heading { text-align: center; }
+
+      .fermentation-grid { grid-template-columns: 1fr; }
+
+      .historia-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .historia-main-img { order: 1; }
+      .historia-text { order: 2; }
+      .historia-gallery {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      .historia-gallery img { height: auto; }
+
+      /* Curso */
+      .curso-v2-hero { padding: 2rem 1rem; }
+      .curso-v2-content-wrapper { padding: 3rem 1rem; }
+      .curso-v2-intro {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        margin-bottom: 3rem;
+      }
+      .curso-v2-details-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+      .curso-v2-intro h1 {
+        font-size: 2.5rem;
+        text-align: center;
+      }
+      .curso-v2-intro p {
+        text-align: center;
+        font-size: 1.1rem;
+      }
+      .curso-v2-details-grid h3 { font-size: 1.8rem; }
+
+      .whatsapp-flotante { bottom: 20px; right: 20px; }
+    }
+
+    @media (max-width: 640px) {
+      .catalog-wrapper { max-width: 280px; }
+    }
 
   </style>
 </head>
@@ -1261,8 +1163,7 @@
       </div>
       <div class="cart-dropdown" id="cart-dropdown">
         <h4>Mi Pedido</h4>
-        <ul id="cart-items">
-          </ul>
+        <ul id="cart-items"></ul>
         <div class="cart-total">
           Total: <span id="cart-total">0.00</span> USD
         </div>
@@ -1284,13 +1185,13 @@
   <div id="modal" class="modal" onclick="cerrarModal(event)">
     <div class="modal-content" role="dialog" aria-modal="true">
       <span class="close" onclick="cerrarModal()" aria-label="Cerrar">×</span>
+      <div class="modal-img-wrap">
+        <img id="modalImg" src="" alt="">
+      </div>
       <div class="modal-body">
         <h2 id="modalTitulo"></h2>
         <p id="modalDescripcion"></p>
         <div id="modalFichaTecnica"></div>
-      </div>
-      <div class="modal-img-wrap">
-        <img id="modalImg" src="" alt="">
       </div>
     </div>
   </div>
@@ -1316,34 +1217,27 @@
       document.getElementById("menu").classList.toggle("show");
     }
 
-    // --- INICIO: NUEVO SCRIPT PARA SUBMENÚS EN MÓVIL ---
     function setupMobileSubmenus() {
         const menuItemsWithSubmenu = document.querySelectorAll('nav #menu > li');
         
         menuItemsWithSubmenu.forEach(item => {
             const submenu = item.querySelector('ul');
-            if (submenu) { // Si el elemento LI tiene un UL adentro
+            if (submenu) {
                 const link = item.querySelector('a');
                 link.addEventListener('click', function(event) {
-                    // Solo activar en vista móvil
                     if (window.innerWidth <= 768) {
-                        event.preventDefault(); // Prevenir navegación
-                        
-                        // Cerrar otros submenús abiertos
+                        event.preventDefault();
                         item.parentElement.querySelectorAll('.submenu-open').forEach(openItem => {
                             if (openItem !== item) {
                                 openItem.classList.remove('submenu-open');
                             }
                         });
-                        
-                        // Abrir o cerrar el submenú actual
                         item.classList.toggle('submenu-open');
                     }
                 });
             }
         });
     }
-    // --- FIN: NUEVO SCRIPT ---
 
     function verDescripcion(img, titulo, descripcion, carpeta = "vasito", fichaTecnicaURL = null) {
       const modal = document.getElementById("modal");
@@ -1370,12 +1264,14 @@
       }
 
       modal.style.display = "flex";
+      document.body.style.overflow = 'hidden'; // Evita scroll de fondo
       document.addEventListener("keydown", escClose);
     }
     
     function cerrarModal(e) {
       if (!e || e.target === document.getElementById("modal") || e.target.classList.contains("close")) {
         document.getElementById("modal").style.display = "none";
+        document.body.style.overflow = 'auto'; // Restaura scroll
         document.removeEventListener("keydown", escClose);
       }
     }
@@ -1401,7 +1297,11 @@
       }
       updateCart();
       cartDropdown.classList.add('show');
-      setTimeout(() => cartDropdown.classList.remove('show'), 2000);
+      setTimeout(() => {
+        if (cartDropdown.classList.contains('show')) {
+            cartDropdown.classList.remove('show');
+        }
+      }, 3000);
     }
 
     function changeQuantity(name, change) {
@@ -1474,6 +1374,8 @@
 
     function cargarPagina(seccion) {
       if (!seccion) seccion = "home";
+      // Cierra el menú móvil al cambiar de página
+      document.getElementById("menu").classList.remove("show");
       location.hash = seccion;
       const cont = document.getElementById("contenido");
       cont.classList.remove("show");
@@ -1613,12 +1515,10 @@
             <section class="product-catalog">
               
               <div class="posicionamiento-contenedor">
-
                 <div id="titulo-vasito">
                   <h2 style="font-size: 2.8rem; text-align: center; margin-bottom: 0.5rem;">Gelatinas en Vasito</h2>
                   <p style="font-size: 1.2rem; text-align: center; max-width: 450px; margin: 0 auto;"><strong>Prácticas presentaciones individuales, para disfrutar en cualquier momento.<br>Contenido: 125 gramos.</strong></p>
                 </div>
-
                 <div id="info-pedidos-vasito" class="info-box" style="margin: 0;">
                   <p>Para pedidos, las cantidades mínimas son de:</p>
                   <ul>
@@ -1626,8 +1526,22 @@
                     <li>4 unidades por sabor, para 2 o más sabores</li>
                   </ul>
                 </div>
-
               </div>
+
+              <div class="gelavasito-header-container">
+                <div class="title-container">
+                  <h2>Gelatinas en Vasito</h2>
+                  <p><strong>Prácticas presentaciones individuales, para disfrutar en cualquier momento.<br>Contenido: 125 gramos.</strong></p>
+                </div>
+                <div class="info-box" style="margin: 0;">
+                  <p>Para pedidos, las cantidades mínimas son de:</p>
+                  <ul>
+                    <li>6 unidades para 1 sabor</li>
+                    <li>4 unidades por sabor, para 2 o más sabores</li>
+                  </ul>
+                </div>
+              </div>
+
               <div class="catalog-wrapper">
                 <h3 class="catalog-heading">En base agua</h3>
                 <div class="grid">
@@ -1746,32 +1660,40 @@
             html = `
                 <section id="seccion-presentacion1">
                     <div class="contenedor-posicionamiento-absoluto">
-                        
                         <div id="texto-p1-movible" class="texto-centrado"> 
                             <h2>PEQUEÑAS</h2>
                             <p>Variadas formas. Incluye: una gelatina principal de 125 gramos que puede tener hasta 3 sabores; 4 esferas pequeñas de gelatina; 45 gramos de fruta fresca; una pequeña gelatina con forma de figura especial. Peso total (promedio) = 200 gramos. Incluye contenedor de plástico desechable.</p>
                         </div>
-                        
                         <div id="infobox-p1-movible" class="info-box">
                             <p>Paquete mínimo de 7 unidades por diseño escogido. Precio total paquete (7 unidades): 17,50 USD + IVA. Pedidos con 72 horas de anticipación.</p>
                         </div>
-
                     </div>
+                    
+                    <div class="decoradas-header-container">
+                        <div class="texto-movible texto-centrado"> 
+                            <h2>PEQUEÑAS</h2>
+                            <p>Variadas formas. Incluye: una gelatina principal de 125 gramos que puede tener hasta 3 sabores; 4 esferas pequeñas de gelatina; 45 gramos de fruta fresca; una pequeña gelatina con forma de figura especial. Peso total (promedio) = 200 gramos. Incluye contenedor de plástico desechable.</p>
+                        </div>
+                        <div class="infobox-movible info-box">
+                            <p>Paquete mínimo de 7 unidades por diseño escogido. Precio total paquete (7 unidades): 17,50 USD + IVA. Pedidos con 72 horas de anticipación.</p>
+                        </div>
+                    </div>
+
                     <div class="galeria-grid">
                         <div class="card p1">
                             <img src="imagenes/decoradas/galeria1/foto1.jpg" alt="Gelatina Principal 1 Sabor">
                             <div class="card-content"><h4>1 Sabor</h4></div>
-                            <div class="card-actions"><button class="action-btn" onclick="addToCart('Paquete Gelatina Decorada (1 Sabor)', 25.00)">Añadir al Carrito</button></div>
+                            <div class="card-actions"><button class="action-btn" onclick="addToCart('Paquete Gela Decorada Pequeña (1 Sabor)', 17.50)">Añadir al Carrito</button></div>
                         </div>
                         <div class="card p1">
                             <img src="imagenes/decoradas/galeria1/foto2.jpg" alt="Gelatina Principal 2 Sabores">
                             <div class="card-content"><h4>2 Sabores</h4></div>
-                            <div class="card-actions"><button class="action-btn" onclick="addToCart('Paquete Gelatina Decorada (2 Sabores)', 25.00)">Añadir al Carrito</button></div>
+                            <div class="card-actions"><button class="action-btn" onclick="addToCart('Paquete Gela Decorada Pequeña (2 Sabores)', 17.50)">Añadir al Carrito</button></div>
                         </div>
                         <div class="card p1">
                             <img src="imagenes/decoradas/galeria1/foto3.jpg" alt="Gelatina Principal 3 Sabores">
                             <div class="card-content"><h4>3 Sabores</h4></div>
-                            <div class="card-actions"><button class="action-btn" onclick="addToCart('Paquete Gelatina Decorada (3 Sabores)', 25.00)">Añadir al Carrito</button></div>
+                            <div class="card-actions"><button class="action-btn" onclick="addToCart('Paquete Gela Decorada Pequeña (3 Sabores)', 17.50)">Añadir al Carrito</button></div>
                         </div>
                     </div>
                     <div style="text-align:center; margin-top:3rem;">
@@ -1782,27 +1704,35 @@
             html = `
                 <section id="seccion-presentacion2">
                     <div class="contenedor-posicionamiento-absoluto">
-                        
                         <div id="texto-p2-movible" class="texto-centrado"> 
                             <h2>MEDIANAS</h2>
                             <p>Variadas formas. Incluye: una gelatina principal de 500 gramos que puede tener desde 1 sabor hasta 3 sabores; 10 esferas pequeñas de gelatina; 90 gramos de fruta fresca; una gelatina pequeña con forma de figura especial. Peso total (promedio) 650 gramos. Inlcuye contenedor de plástico desechable.</p>
                         </div>
-                        
                         <div id="infobox-p2-movible" class="info-box">
                             <p>Precio unitario: 9,75 USD + IVA. Pedidos con 72 horas de anticipación.</p>
                         </div>
-
                     </div>
+                    
+                    <div class="decoradas-header-container">
+                        <div class="texto-movible texto-centrado"> 
+                            <h2>MEDIANAS</h2>
+                            <p>Variadas formas. Incluye: una gelatina principal de 500 gramos que puede tener desde 1 sabor hasta 3 sabores; 10 esferas pequeñas de gelatina; 90 gramos de fruta fresca; una gelatina pequeña con forma de figura especial. Peso total (promedio) 650 gramos. Inlcuye contenedor de plástico desechable.</p>
+                        </div>
+                        <div class="infobox-movible info-box">
+                            <p>Precio unitario: 9,75 USD + IVA. Pedidos con 72 horas de anticipación.</p>
+                        </div>
+                    </div>
+
                     <div class="galeria-grid">
                         <div class="card p2">
                             <img src="imagenes/decoradas/galeria2/foto1.jpg" alt="Gelatina Mediana Ejemplo 1">
                             <div class="card-content"><h4>2 Sabores</h4></div>
-                             <div class="card-actions"><button class="action-btn" onclick="addToCart('Paquete Gelatina Mediana (Floral)', 35.00)">Añadir al Carrito</button></div>
+                             <div class="card-actions"><button class="action-btn" onclick="addToCart('Gelatina Decorada Mediana (2 Sabores)', 9.75)">Añadir al Carrito</button></div>
                         </div>
                         <div class="card p2">
                             <img src="imagenes/decoradas/galeria2/foto2.jpg" alt="Gelatina Mediana Ejemplo 2">
                             <div class="card-content"><h4>3 Sabores</h4></div>
-                            <div class="card-actions"><button class="action-btn" onclick="addToCart('Paquete Gelatina Mediana (Frutal)', 35.00)">Añadir al Carrito</button></div>
+                            <div class="card-actions"><button class="action-btn" onclick="addToCart('Gelatina Decorada Mediana (3 Sabores)', 9.75)">Añadir al Carrito</button></div>
                         </div>
                     </div>
                     <div style="text-align:center; margin-top:3rem;">
@@ -1813,33 +1743,40 @@
             html = `
                 <section id="seccion-presentacion3">
                      <div class="contenedor-posicionamiento-absoluto">
-                        
                         <div id="texto-p3-movible" class="texto-centrado"> 
                             <h2>GRANDES</h2>
                             <p>Variadas formas. Incluye: una gelatina principal de 1500 gramos que puede tener desde 1 hasta 3 sabores; 200 gramos de esferas y cubitos de tamaño mediano de gelatina; 200 gramos de fruta fresca. Peso total (promedio) 1900 gramos. Incluye contenedor de plástico desechable.</p>
                         </div>
-                        
                         <div id="infobox-p3-movible" class="info-box">
                             <p>Precio unitario: 20,00 USD + IVA. Pedidos con 72 horas de anticipación.</p>
                         </div>
-
                     </div>
+                    
+                    <div class="decoradas-header-container">
+                        <div class="texto-movible texto-centrado"> 
+                            <h2>GRANDES</h2>
+                            <p>Variadas formas. Incluye: una gelatina principal de 1500 gramos que puede tener desde 1 hasta 3 sabores; 200 gramos de esferas y cubitos de tamaño mediano de gelatina; 200 gramos de fruta fresca. Peso total (promedio) 1900 gramos. Incluye contenedor de plástico desechable.</p>
+                        </div>
+                        <div class="infobox-movible info-box">
+                            <p>Precio unitario: 20,00 USD + IVA. Pedidos con 72 horas de anticipación.</p>
+                        </div>
+                    </div>
+
                     <div class="galeria-grid">
                         <div class="card p3">
                             <img src="imagenes/decoradas/galeria3/foto1.jpg" alt="Gelatina Grande Ejemplo 1">
                             <div class="card-content"><h4>2 Sabores</h4></div>
-                             <div class="card-actions"><button class="action-btn" onclick="addToCart('Gelatina Grande (Torta)', 50.00)">Añadir al Carrito</button></div>
+                             <div class="card-actions"><button class="action-btn" onclick="addToCart('Gelatina Decorada Grande (2 Sabores)', 20.00)">Añadir al Carrito</button></div>
                         </div>
                         <div class="card p3">
                             <img src="imagenes/decoradas/galeria3/foto2.jpg" alt="Gelatina Grande Ejemplo 2">
                             <div class="card-content"><h4>2 Sabores</h4></div>
-                            <div class="card-actions"><button class="action-btn" onclick="addToCart('Gelatina Grande (Mosaico)', 50.00)">Añadir al Carrito</button></div>
+                            <div class="card-actions"><button class="action-btn" onclick="addToCart('Gelatina Decorada Grande (2 Sabores)', 20.00)">Añadir al Carrito</button></div>
                         </div>
-                        
                         <div class="card p3">
                             <img src="imagenes/decoradas/galeria3/foto3.jpg" alt="Gelatina Grande Nuevo Modelo">
                             <div class="card-content"><h4>3 Sabores</h4></div>
-                            <div class="card-actions"><button class="action-btn" onclick="addToCart('Gelatina Grande (Nuevo Modelo)', 50.00)">Añadir al Carrito</button></div>
+                            <div class="card-actions"><button class="action-btn" onclick="addToCart('Gelatina Decorada Grande (3 Sabores)', 20.00)">Añadir al Carrito</button></div>
                         </div>
                         </div>
                     <div style="text-align:center; margin-top:3rem;">
@@ -2062,7 +1999,7 @@
                                 <p class="probiotic-price">4.00 USD + IVA</p>
                             </div>
                             <div class="card-actions">
-                                <button class="action-btn" onclick="addToCart('Kéfir de Agua (1000ml)', 4.00)">Añadir al Carrito</button>
+                                <button class="action-btn" onclick="addToCart('Kéfir de Agua (750ml)', 4.00)">Añadir al Carrito</button>
                             </div>
                         </div>
                     </div>
@@ -2102,7 +2039,7 @@
                                 <p class="probiotic-price">4.00 USD + IVA</p>
                             </div>
                             <div class="card-actions">
-                                <button class="action-btn" onclick="addToCart('Kombucha (1000ml)', 4.00)">Añadir al Carrito</button>
+                                <button class="action-btn" onclick="addToCart('Kombucha (750ml)', 4.00)">Añadir al Carrito</button>
                             </div>
                         </div>
                     </div>
@@ -2124,7 +2061,7 @@
       let seccion = location.hash.replace("#", "") || "home";
       cargarPagina(seccion);
       updateCart();
-      setupMobileSubmenus(); // <--- SE LLAMA LA NUEVA FUNCIÓN AQUÍ
+      setupMobileSubmenus();
     });
     window.addEventListener("hashchange", () => {
       let seccion = location.hash.replace("#", "") || "home";
