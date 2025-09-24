@@ -516,7 +516,6 @@
         height: 220px;
     }
     
-    /* INICIO: REFACTORIZACIÓN COMPLETA PARA MÓVIL (GELAVASITO) */
     .gelavasito-header-container {
       display: flex;
       flex-direction: column;
@@ -538,7 +537,6 @@
         margin: 0 auto;
     }
 
-    /* Contenedor desktop que usa posicionamiento absoluto */
     .posicionamiento-contenedor {
       position: relative;
       height: 180px;
@@ -557,7 +555,6 @@
       top: 30px;
       right: 0px; 
     }
-    /* FIN: REFACTORIZACIÓN */
 
     .info-box {
       background: var(--neutral-light);
@@ -805,7 +802,6 @@
         padding-right: 0;
     }
 
-    /* INICIO: REFACTORIZACIÓN COMPLETA PARA MÓVIL (GELAS DECORADAS) */
     .decoradas-header-container {
       display: flex;
       flex-direction: column;
@@ -814,12 +810,12 @@
       padding: 0 1rem;
     }
     .decoradas-header-container .texto-movible {
-      order: 1; /* El texto va primero */
+      order: 1;
       width: 100%;
       max-width: 500px;
     }
     .decoradas-header-container .infobox-movible {
-      order: 2; /* El info box va segundo */
+      order: 2;
       width: 100%;
       max-width: 380px;
       margin: 0;
@@ -828,7 +824,6 @@
     .decoradas-header-container .texto-movible p {
       text-align: center;
     }
-    /* Contenedor desktop que usa posicionamiento absoluto */
     .contenedor-posicionamiento-absoluto {
         position: relative;
         width: 100%;
@@ -846,7 +841,6 @@
     #infobox-p2-movible { top: 1.75rem; right: 4vw; }
     #texto-p3-movible { top: 0.8rem; left: 30vw; }
     #infobox-p3-movible { top: 0.8rem; right: 5vw; }
-    /* FIN: REFACTORIZACIÓN */
 
     .probiotics-catalog .probiotic-description {
         text-align: left !important;
@@ -1062,21 +1056,26 @@
       .home-content-section p { font-size: 1.1rem; }
       .pill { font-size: 1rem; padding: 0.8rem 1.5rem; }
       
+      /* INICIO: AJUSTE FINAL MODAL */
       .modal-content {
         grid-template-columns: 1fr;
         max-height: 92vh;
         padding: 1rem;
-        gap: 1rem;
+        gap: 0.5rem; /* Menos espacio entre imagen y texto */
       }
       .modal-img-wrap { order: 1; }
-      .modal-body { order: 2; }
-      .modal-content img { max-height: 35vh; }
+      .modal-body { order: 2; font-size: 0.95rem; } /* Texto un poco más pequeño */
+      .modal-content img { max-height: 30vh; } /* Imagen un poco más pequeña */
       .close { top: 8px; right: 8px; }
+      /* FIN: AJUSTE FINAL MODAL */
 
+      /* INICIO: AJUSTE FINAL CARRITO */
       .cart-dropdown {
           width: 90vw;
           max-width: 350px;
+          right: -1rem; /* Mueve el carrito hacia la izquierda para que sea visible */
       }
+      /* FIN: AJUSTE FINAL CARRITO */
 
       .catalog-wrapper { max-width: 592px; }
       h3.catalog-heading { text-align: center; }
