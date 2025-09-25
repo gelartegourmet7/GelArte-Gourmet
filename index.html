@@ -1190,6 +1190,38 @@
     z-index: 1000 !important;
   }
 }
+     /* --- ARREGLO CARRITO EN CELULAR --- */
+.cart-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.6);
+  z-index: 9998; /* debajo del carrito */
+}
+
+.cart-dropdown {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 95vw;            /* casi todo el ancho */
+  max-width: 450px;       /* límite para pantallas grandes */
+  max-height: 85vh;       /* límite alto */
+  overflow-y: auto;       /* scroll si hay muchos productos */
+  background: #fff;       /* fondo blanco */
+  padding: 1.2rem;
+  border-radius: 1rem;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  z-index: 9999; /* siempre arriba */
+}
+
+.cart-dropdown.show { display: block; }
+.cart-overlay.show { display: block; }
+ 
  
     }
 
@@ -2177,7 +2209,12 @@
       let seccion = location.hash.replace("#", "") || "home";
       cargarPagina(seccion);
     });
+    
+    // Cerrar carrito al tocar el fondo oscuro
+document.querySelector('.cart-overlay').addEventListener('click', toggleCart);
+
   </script>
 </body>
 </html>
+
 
