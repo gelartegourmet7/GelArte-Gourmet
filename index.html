@@ -31,8 +31,6 @@
       position: relative; 
     }
     
-    /* SE ELIMINÓ LA REGLA body.modal-is-open PARA DEJAR QUE JS LO CONTROLE TODO */
-
     body.home-bg::before {
         content: ''; 
         position: fixed; 
@@ -853,7 +851,7 @@
     #texto-p1-movible { top: 0.5rem; left: 30vw; }
     #infobox-p1-movible { top: 0rem; right: 6vw; }
     #texto-p2-movible { top: 0.5rem; left: 30vw; }
-    #infobox-p2-movible { top: 1.7rem; right: 4vw; }
+    #infobox-p2-movible { top: 1.75rem; right: 4vw; }
     #texto-p3-movible { top: 0.8rem; left: 30vw; }
     #infobox-p3-movible { top: 0.8rem; right: 5vw; }
 
@@ -1068,7 +1066,10 @@
         width: 100%;
       }
       .home-info-image img { margin: 0 auto; }
-      .reconocimientos-logos { justify-content: center; }
+      .reconocimientos-logos {
+        justify-content: center;
+        flex-wrap: wrap; /* SOLUCIÓN 1: Permite que los logos se apilen si no hay espacio */
+      }
       /* FIN: CORRECCIÓN FINAL HOMEPAGE GRID */
 
       .home-content-section h2 { font-size: 2.5rem; }
@@ -1082,7 +1083,11 @@
         gap: 0.5rem;
       }
       .modal-img-wrap { order: 1; }
-      .modal-body { order: 2; font-size: 0.95rem; }
+      .modal-body {
+        order: 2;
+        font-size: 0.95rem;
+        min-height: 0; /* SOLUCIÓN 2: Corrige el problema de scroll en el texto del modal */
+      }
       .modal-content img { max-height: 30vh; }
       .close { top: 8px; right: 8px; }
 
@@ -1347,7 +1352,6 @@
             }
         }
     }
-
 
     function addToCart(name, price) {
       const existingItem = cart.find(item => item.name === name);
