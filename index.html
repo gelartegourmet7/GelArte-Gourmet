@@ -673,7 +673,7 @@
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
     
-    /* INICIO: REFACTORIZACIÓN COMPLETA DEL CARRITO */
+    /* ESTILOS DEL CARRITO PARA ESCRITORIO */
     .cart-container {
       position: relative;
       z-index: 1000;
@@ -711,16 +711,8 @@
       box-shadow: 0 8px 24px rgba(0,0,0,0.15);
       padding: 1.2rem;
     }
-    /* El overlay para el fondo cuando el carrito está abierto en móvil */
-    .cart-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background-color: rgba(92, 58, 33, 0.6);
-      z-index: 1005;
-    }
+    .cart-overlay { display: none; }
     .cart-dropdown.show { display: block; }
-
     #cart-items {
       list-style: none;
       padding: 0;
@@ -758,9 +750,7 @@
     .cart-info strong { color: var(--text); }
     .cart-info p { margin: 0.3rem 0; }
     #whatsapp-checkout { width: 100%; margin-top: 1rem; }
-    /* FIN: REFACTORIZACIÓN COMPLETA DEL CARRITO */
-
-
+    
     .imagen-principal {
       display: block;
       max-width: 100%;
@@ -1054,7 +1044,6 @@
       nav li:hover > ul { display: none; }
       nav li.submenu-open > ul { display: block; }
 
-      /* INICIO: CORRECCIÓN FINAL HOMEPAGE GRID */
       .home-info-grid {
         flex-direction: column;
         text-align: center;
@@ -1062,7 +1051,7 @@
       }
       .home-info-text, .home-info-image {
         text-align: center;
-        flex-basis: auto; /* Permite que el contenido determine la altura */
+        flex-basis: auto;
         width: 100%;
       }
       .home-info-image img { margin: 0 auto; }
@@ -1070,7 +1059,6 @@
         justify-content: center;
         flex-wrap: wrap; 
       }
-      /* FIN: CORRECCIÓN FINAL HOMEPAGE GRID */
 
       .home-content-section h2 { font-size: 2.5rem; }
       .home-content-section p { font-size: 1.1rem; }
@@ -1081,7 +1069,6 @@
         max-height: 92vh;
         padding: 1rem;
         gap: 0.5rem;
-        /* SOLUCIÓN 3: Se define explícitamente el tamaño de las filas del grid */
         grid-template-rows: auto 1fr; 
       }
       .modal-img-wrap { order: 1; }
@@ -1092,20 +1079,35 @@
       }
       .modal-content img { max-height: 30vh; }
       .close { top: 8px; right: 8px; }
-
-      /* INICIO: CORRECCIÓN FINAL CARRITO CENTRADO */
-      .cart-dropdown {
-          position: fixed;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          width: 90vw;
-          max-width: 400px;
-          z-index: 1010;
-          box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      
+      /* ================================================= */
+      /* ===== INICIO: SOLUCIÓN CARRITO PARA CELULAR ===== */
+      /* ================================================= */
+      .cart-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 9998; /* Justo debajo del carrito */
       }
-      /* FIN: CORRECCIÓN FINAL CARRITO CENTRADO */
-
+      .cart-dropdown {
+        display: none;
+        position: fixed !important; /* Usamos !important para asegurar que sobreescriba otras reglas */
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        width: 90vw !important;
+        max-width: 400px !important;
+        max-height: 85vh !important;
+        overflow-y: auto !important; /* Permite scroll si hay muchos items */
+        z-index: 9999; /* Máxima prioridad para estar encima de todo */
+        box-shadow: 0 10px 40px rgba(0,0,0,0.25) !important;
+      }
+      .cart-dropdown.show { display: block !important; }
+      .cart-overlay.show { display: block !important; }
+      /* =============================================== */
+      /* ===== FIN: SOLUCIÓN CARRITO PARA CELULAR ====== */
+      /* =============================================== */
 
       .catalog-wrapper { max-width: 592px; }
       h3.catalog-heading { text-align: center; }
@@ -1124,7 +1126,6 @@
       }
       .historia-gallery img { height: auto; }
 
-      /* Curso */
       .curso-v2-hero { padding: 2rem 1rem; }
       .curso-v2-content-wrapper { padding: 3rem 1rem; }
       .curso-v2-intro {
@@ -1151,80 +1152,7 @@
 
     @media (max-width: 640px) {
       .catalog-wrapper { max-width: 280px; }
-
-     /* --- FIX: asegurar que el carrito móvil quede siempre encima --- */
-@media (max-width: 768px) {
-  /* overlay (fondo oscuro) */
-  .cart-overlay {
-    display: none;
-    position: fixed !important;
-    inset: 0 !important;
-    background-color: rgba(0,0,0,0.55) !important;
-    z-index: 99990 !important;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  /* caja del carrito centrada y con prioridad visual */
-  .cart-dropdown {
-    display: none;
-    position: fixed !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    width: 92vw !important;
-    max-width: 420px !important;
-    max-height: 86vh !important;
-    overflow-y: auto !important;
-    background: var(--bg) !important;
-    padding: 1.2rem !important;
-    border-radius: 1rem !important;
-    box-shadow: 0 12px 48px rgba(0,0,0,0.35) !important;
-    z-index: 99999 !important;
-  }
-
-  /* cuando tenga la clase .show que se muestre */
-  .cart-dropdown.show { display: block !important; }
-
-  /* aseguramos que elementos del header no aparezcan por encima */
-  header, .logo, .whatsapp-flotante, .modal {
-    z-index: 1000 !important;
-  }
-}
-     /* --- ARREGLO CARRITO EN CELULAR --- */
-.cart-overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0,0,0,0.6);
-  z-index: 9998; /* debajo del carrito */
-}
-
-.cart-dropdown {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 95vw;            /* casi todo el ancho */
-  max-width: 450px;       /* límite para pantallas grandes */
-  max-height: 85vh;       /* límite alto */
-  overflow-y: auto;       /* scroll si hay muchos productos */
-  background: #fff;       /* fondo blanco */
-  padding: 1.2rem;
-  border-radius: 1rem;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
-  z-index: 9999; /* siempre arriba */
-}
-
-.cart-dropdown.show { display: block; }
-.cart-overlay.show { display: block; }
- 
- 
     }
-
   </style>
 </head>
 <body>
@@ -1412,15 +1340,15 @@
 
     function toggleCart() {
         const isMobile = window.innerWidth <= 768;
-        const cartIsOpening = !cartDropdown.classList.contains('show');
         cartDropdown.classList.toggle('show');
-
+        
+        // La lógica del overlay y bloqueo de scroll se aplica en móvil
         if (isMobile) {
-            if (cartIsOpening) {
-                cartOverlay.style.display = 'block';
+            const isOpening = cartDropdown.classList.contains('show');
+            cartOverlay.classList.toggle('show', isOpening);
+            if (isOpening) {
                 lockScreen();
             } else {
-                cartOverlay.style.display = 'none';
                 unlockScreen();
             }
         }
@@ -1763,7 +1691,7 @@
                     </div>
                   </div>
                   <div class="card">
-                    <img src="imagenes/vasito/matcha.jpg" alt="GELAMATCHA" onclick="verDescripcion('matcha.jpg','GELAMATCHA','Gracias a su alta concentración de antioxidantes, el té matcha contribuye a combatir el estrés oxidativo, favorece el metabolismo y promueve la salud cardiovascular. ¡Un verdadero superalimento!\\n\\nIngredientes: Leche entera, Té Matcha orgánico, Limón, Panela granulada, Gelatina sin sabor y Colágeno hidrolizado. Probiótico: Kéfir de Leche.\\n\\nContenido: 125 gramos.\\n\\nPVP: 0.95 USD','vasito')">
+                    <img src="imagenes/vasito/matcha.jpg" alt="GELAMATCHA" onclick="verDescripcion('matcha.jpg','GELAMATCHA','Gracias a su alta concentración de antioxidantes, el té matcha contribuye a combatir el estrés oxidativo, favorece el metabolismo y promovemos la salud cardiovascular. ¡Un verdadero superalimento!\\n\\nIngredientes: Leche entera, Té Matcha orgánico, Limón, Panela granulada, Gelatina sin sabor y Colágeno hidrolizado. Probiótico: Kéfir de Leche.\\n\\nContenido: 125 gramos.\\n\\nPVP: 0.95 USD','vasito')">
                     <div class="card-content"><h4>GELAMATCHA</h4></div>
                     <div class="card-actions">
                       <button class="btn-secondary" onclick="verDescripcion('matcha.jpg','GELAMATCHA','Gracias a su alta concentración de antioxidantes, el té matcha contribuye a combatir el estrés oxidativo, favorece el metabolismo y promueve la salud cardiovascular. ¡Un verdadero superalimento!\\n\\nIngredientes: Leche entera, Té Matcha orgánico, Limón, Panela granulada, Gelatina sin sabor y Colágeno hidrolizado. Probiótico: Kéfir de Leche.\\n\\nContenido: 125 gramos.\\n\\nPVP: 0.95 USD','vasito')">Ver más</button>
@@ -2210,11 +2138,6 @@
       cargarPagina(seccion);
     });
     
-    // Cerrar carrito al tocar el fondo oscuro
-document.querySelector('.cart-overlay').addEventListener('click', toggleCart);
-
   </script>
 </body>
 </html>
-
-
