@@ -1162,8 +1162,9 @@
       }
 
       /* El panel del carrito (Modal) */
-      .cart-dropdown {
-        position: static; /* Ya no necesita position: fixed */
+      /* Usamos un selector más específico para evitar conflictos con los estilos de escritorio */
+      .cart-overlay .cart-dropdown {
+        position: static; /* Ya no necesita position: absolute */
         display: flex; /* Flexbox para la estructura interna */
         flex-direction: column; /* Apila los elementos verticalmente */
         width: 100%;
@@ -1184,8 +1185,8 @@
       }
       
       /* Partes internas del carrito móvil */
-      .cart-dropdown .cart-header,
-      .cart-dropdown .cart-footer {
+      .cart-overlay .cart-dropdown .cart-header,
+      .cart-overlay .cart-dropdown .cart-footer {
         flex-shrink: 0; /* Evita que el header y footer se encojan */
       }
       
@@ -1843,7 +1844,7 @@
                     <div class="contenedor-posicionamiento-absoluto">
                         <div id="texto-p2-movible" class="texto-centrado"> 
                             <h2>MEDIANAS</h2>
-                            <p>Variadas formas. Incluye: una gelatina principal de 500 gramos que puede tener desde 1 sabor hasta 3 sabores; 10 esferas pequeñas de gelatina; 90 gramos de fruta fresca; una gelatina pequeña con forma de figura especial. Peso total (promedio) 650 gramos. Inlcuye contenedor de plástico desechable.</p>
+                            <p>Variadas formas. Incluye: una gelatina principal de 500 gramos que puede tener desde 1 sabor hasta 3 sabores; 10 esferas pequenas de gelatina; 90 gramos de fruta fresca; una gelatina pequena con forma de figura especial. Peso total (promedio) 650 gramos. Inlcuye contenedor de plástico desechable.</p>
                         </div>
                         <div id="infobox-p2-movible" class="info-box">
                             <p>Precio unitario: 9,75 USD + IVA. Pedidos con 72 horas de anticipación.</p>
@@ -1853,7 +1854,7 @@
                     <div class="decoradas-header-container">
                         <div class="texto-movible texto-centrado"> 
                             <h2>MEDIANAS</h2>
-                            <p>Variadas formas. Incluye: una gelatina principal de 500 gramos que puede tener desde 1 sabor hasta 3 sabores; 10 esferas pequeñas de gelatina; 90 gramos de fruta fresca; una gelatina pequeña con forma de figura especial. Peso total (promedio) 650 gramos. Inlcuye contenedor de plástico desechable.</p>
+                            <p>Variadas formas. Incluye: una gelatina principal de 500 gramos que puede tener desde 1 sabor hasta 3 sabores; 10 esferas pequenas de gelatina; 90 gramos de fruta fresca; una gelatina pequena con forma de figura especial. Peso total (promedio) 650 gramos. Inlcuye contenedor de plástico desechable.</p>
                         </div>
                         <div class="infobox-movible info-box">
                             <p>Precio unitario: 9,75 USD + IVA. Pedidos con 72 horas de anticipación.</p>
@@ -1882,7 +1883,7 @@
                      <div class="contenedor-posicionamiento-absoluto">
                         <div id="texto-p3-movible" class="texto-centrado"> 
                             <h2>GRANDES</h2>
-                            <p>Variadas formas. Incluye: una gelatina principal de 1500 gramos que puede tener desde 1 hasta 3 sabores; 200 gramos de esferas y cubitos de tamaño mediano de gelatina; 200 gramos de fruta fresca. Peso total (promedio) 1900 gramos. Incluye contenedor de plástico desechable.</p>
+                            <p>Variadas formas. Incluye: una gelatina principal de 1500 gramos que puede tener desde 1 hasta 3 sabores; 200 gramos de esferas y cubitos de tamano mediano de gelatina; 200 gramos de fruta fresca. Peso total (promedio) 1900 gramos. Incluye contenedor de plástico desechable.</p>
                         </div>
                         <div id="infobox-p3-movible" class="info-box">
                             <p>Precio unitario: 20,00 USD + IVA. Pedidos con 72 horas de anticipación.</p>
@@ -1892,7 +1893,7 @@
                     <div class="decoradas-header-container">
                         <div class="texto-movible texto-centrado"> 
                             <h2>GRANDES</h2>
-                            <p>Variadas formas. Incluye: una gelatina principal de 1500 gramos que puede tener desde 1 hasta 3 sabores; 200 gramos de esferas y cubitos de tamaño mediano de gelatina; 200 gramos de fruta fresca. Peso total (promedio) 1900 gramos. Incluye contenedor de plástico desechable.</p>
+                            <p>Variadas formas. Incluye: una gelatina principal de 1500 gramos que puede tener desde 1 hasta 3 sabores; 200 gramos de esferas y cubitos de tamano mediano de gelatina; 200 gramos de fruta fresca. Peso total (promedio) 1900 gramos. Incluye contenedor de plástico desechable.</p>
                         </div>
                         <div class="infobox-movible info-box">
                             <p>Precio unitario: 20,00 USD + IVA. Pedidos con 72 horas de anticipación.</p>
