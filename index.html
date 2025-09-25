@@ -31,14 +31,7 @@
       position: relative; 
     }
     
-    /* Clases para controlar el estado del body cuando hay ventanas abiertas */
-    body.modal-is-open, body.cart-is-open {
-      overflow: hidden;
-      /* SOLUCIÓN: Esta propiedad evita que el scroll se propague al body
-         cuando el modal o el carrito están abiertos, previniendo el molesto
-         "salto" o reajuste de la página en dispositivos móviles. */
-      overscroll-behavior: contain;
-    }
+    /* SE ELIMINÓ LA REGLA body.modal-is-open PARA DEJAR QUE JS LO CONTROLE TODO */
 
     body.home-bg::before {
         content: ''; 
@@ -860,7 +853,7 @@
     #texto-p1-movible { top: 0.5rem; left: 30vw; }
     #infobox-p1-movible { top: 0rem; right: 6vw; }
     #texto-p2-movible { top: 0.5rem; left: 30vw; }
-    #infobox-p2-movible { top: 1.75rem; right: 4vw; }
+    #infobox-p2-movible { top: 1.7rem; right: 4vw; }
     #texto-p3-movible { top: 0.8rem; left: 30vw; }
     #infobox-p3-movible { top: 0.8rem; right: 5vw; }
 
@@ -1094,6 +1087,7 @@
       .close { top: 8px; right: 8px; }
 
       /* INICIO: CORRECCIÓN FINAL CARRITO CENTRADO */
+      /* Este código ya es correcto, el problema era el "salto" de la página */
       .cart-dropdown {
           position: fixed;
           top: 50%;
@@ -1270,6 +1264,25 @@
         });
     }
 
+    // --- LÓGICA DE BLOQUEO DE PANTALLA ---
+    let scrollPosition = 0;
+    
+    function lockScreen() {
+        scrollPosition = window.pageYOffset;
+        document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${scrollPosition}px`;
+        document.body.style.width = '100%';
+    }
+
+    function unlockScreen() {
+        document.body.style.removeProperty('overflow');
+        document.body.style.removeProperty('position');
+        document.body.style.removeProperty('top');
+        document.body.style.removeProperty('width');
+        window.scrollTo(0, scrollPosition);
+    }
+
     // --- LÓGICA MODAL ---
     function verDescripcion(img, titulo, descripcion, carpeta = "vasito", fichaTecnicaURL = null) {
       const modal = document.getElementById("modal");
@@ -1296,14 +1309,14 @@
       }
 
       modal.style.display = "flex";
-      document.body.classList.add('modal-is-open');
+      lockScreen();
       document.addEventListener("keydown", escClose);
     }
     
     function cerrarModal(e) {
       if (!e || e.target === document.getElementById("modal") || e.target.classList.contains("close")) {
         document.getElementById("modal").style.display = "none";
-        document.body.classList.remove('modal-is-open');
+        unlockScreen();
         document.removeEventListener("keydown", escClose);
       }
     }
@@ -1320,14 +1333,21 @@
     let cart = [];
 
     function toggleCart() {
-      const isMobile = window.innerWidth <= 768;
-      const isShown = cartDropdown.classList.toggle('show');
-      
-      if (isMobile) {
-        cartOverlay.style.display = isShown ? 'block' : 'none';
-        document.body.classList.toggle('cart-is-open', isShown);
-      }
+        const isMobile = window.innerWidth <= 768;
+        const cartIsOpening = !cartDropdown.classList.contains('show');
+        cartDropdown.classList.toggle('show');
+
+        if (isMobile) {
+            if (cartIsOpening) {
+                cartOverlay.style.display = 'block';
+                lockScreen();
+            } else {
+                cartOverlay.style.display = 'none';
+                unlockScreen();
+            }
+        }
     }
+
 
     function addToCart(name, price) {
       const existingItem = cart.find(item => item.name === name);
