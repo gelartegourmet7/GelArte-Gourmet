@@ -1038,6 +1038,7 @@
         background: var(--bg);
         padding: 1rem 0;
         box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        z-index: 998; /* Para que esté debajo del carrito */
       }
       nav ul.show { display: flex; }
       nav ul li { text-align: center; width: 100%; }
@@ -1068,7 +1069,7 @@
       .home-info-image img { margin: 0 auto; }
       .reconocimientos-logos {
         justify-content: center;
-        flex-wrap: wrap; 
+        flex-wrap: wrap; /* SOLUCIÓN 1: Permite que los logos se apilen si no hay espacio */
       }
       /* FIN: CORRECCIÓN FINAL HOMEPAGE GRID */
 
@@ -1081,30 +1082,31 @@
         max-height: 92vh;
         padding: 1rem;
         gap: 0.5rem;
-        /* SOLUCIÓN 3: Se define explícitamente el tamaño de las filas del grid */
-        grid-template-rows: auto 1fr; 
       }
       .modal-img-wrap { order: 1; }
       .modal-body {
         order: 2;
         font-size: 0.95rem;
-        min-height: 0;
+        min-height: 0; /* SOLUCIÓN 2: Corrige el problema de scroll en el texto del modal */
       }
       .modal-content img { max-height: 30vh; }
       .close { top: 8px; right: 8px; }
-
-      /* INICIO: CORRECCIÓN FINAL CARRITO CENTRADO */
+      
+      /* INICIO: CORRECCIÓN CARRITO MÓVIL */
       .cart-dropdown {
-          position: fixed;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          width: 90vw;
+          position: absolute;
+          top: calc(100% + 10px); /* Se despliega desde abajo del header */
+          right: 0;
+          left: auto;
+          width: 95vw; /* Ocupa casi todo el ancho */
           max-width: 400px;
-          z-index: 1010;
-          box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+          transform: none; /* Reseteamos la transformación */
+          z-index: 999; /* Aseguramos que esté por encima del menú */
       }
-      /* FIN: CORRECCIÓN FINAL CARRITO CENTRADO */
+      .cart-overlay {
+          display: none; /* Ya no es necesario el overlay con este diseño */
+      }
+      /* FIN: CORRECCIÓN CARRITO MÓVIL */
 
 
       .catalog-wrapper { max-width: 592px; }
@@ -1339,19 +1341,11 @@
     let cart = [];
 
     function toggleCart() {
-        const isMobile = window.innerWidth <= 768;
-        const cartIsOpening = !cartDropdown.classList.contains('show');
-        cartDropdown.classList.toggle('show');
-
-        if (isMobile) {
-            if (cartIsOpening) {
-                cartOverlay.style.display = 'block';
-                lockScreen();
-            } else {
-                cartOverlay.style.display = 'none';
-                unlockScreen();
-            }
+        // Al abrir el carrito en móvil, cerramos el menú principal si está abierto.
+        if (window.innerWidth <= 768 && !cartDropdown.classList.contains('show')) {
+            document.getElementById("menu").classList.remove("show");
         }
+        cartDropdown.classList.toggle('show');
     }
 
     function addToCart(name, price) {
@@ -1446,6 +1440,7 @@
     function cargarPagina(seccion) {
       if (!seccion) seccion = "home";
       document.getElementById("menu").classList.remove("show");
+      document.getElementById("cart-dropdown").classList.remove("show"); // Oculta el carrito al cambiar de página
       location.hash = seccion;
       const cont = document.getElementById("contenido");
       cont.classList.remove("show");
