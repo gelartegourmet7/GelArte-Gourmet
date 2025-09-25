@@ -34,6 +34,10 @@
     /* Clases para controlar el estado del body cuando hay ventanas abiertas */
     body.modal-is-open, body.cart-is-open {
       overflow: hidden;
+      /* SOLUCIÓN: Esta propiedad evita que el scroll se propague al body
+         cuando el modal o el carrito están abiertos, previniendo el molesto
+         "salto" o reajuste de la página en dispositivos móviles. */
+      overscroll-behavior: contain;
     }
 
     body.home-bg::before {
