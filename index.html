@@ -31,6 +31,17 @@
       position: relative; 
     }
     
+    /* ================================================= */
+    /* ===== INICIO: SOLUCIÓN BLOQUEO DE SCROLL ====== */
+    /* ================================================= */
+    /* Clase que se añade al BODY para evitar el scroll cuando el carrito está abierto */
+    body.cart-open {
+      overflow: hidden;
+    }
+    /* =============================================== */
+    /* ===== FIN: SOLUCIÓN BLOQUEO DE SCROLL ====== */
+    /* =============================================== */
+
     body.home-bg::before {
         content: ''; 
         position: fixed; 
@@ -55,7 +66,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      z-index: 10;
+      z-index: 1000;
       border-bottom: 1px solid rgba(0,0,0,0.05);
     }
     
@@ -673,10 +684,13 @@
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
     
-    /* ESTILOS DEL CARRITO PARA ESCRITORIO */
+    /* ========================================================= */
+    /* ===== INICIO: REFACTORIZACIÓN COMPLETA DEL CARRITO ===== */
+    /* ========================================================= */
+
+    /* Contenedor principal del carrito y el icono */
     .cart-container {
       position: relative;
-      z-index: 1000;
       margin-left: 1.5rem;
     }
     .cart-icon {
@@ -700,6 +714,8 @@
       align-items: center;
       font-weight: bold;
     }
+
+    /* Estilos del carrito para ESCRITORIO */
     .cart-dropdown {
       display: none;
       position: absolute;
@@ -709,17 +725,63 @@
       background: var(--bg);
       border-radius: 1rem;
       box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-      padding: 1.2rem;
+      z-index: 1001;
+      padding: 0;
     }
-    .cart-overlay { display: none; }
-    .cart-dropdown.show { display: block; }
+    .cart-dropdown.show {
+      display: block;
+    }
+    @media (min-width: 769px) {
+        .cart-dropdown.show {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+
+    /* Ocultamos el overlay en escritorio */
+    .cart-overlay {
+      display: none;
+    }
+
+    /* Estructura interna del carrito (común para móvil y escritorio) */
+    .cart-dropdown .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding: 1.2rem 1.2rem 0.5rem 1.2rem;
+      border-bottom: 1px solid var(--neutral-light);
+    }
+    .cart-dropdown .cart-header h4 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+    .cart-dropdown .close {
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: var(--text);
+      line-height: 1;
+      background: none;
+      border: none;
+      padding: 0;
+      position: static;
+    }
+
     #cart-items {
       list-style: none;
-      padding: 0;
+      padding: 0 1.2rem;
       margin: 0;
-      max-height: 200px;
-      overflow-y: auto;
     }
+    
+    /* En escritorio, la lista tiene scroll si es necesario */
+    @media (min-width: 769px) {
+      #cart-items {
+        max-height: 200px;
+        overflow-y: auto;
+      }
+    }
+
     #cart-items li {
       display: flex;
       justify-content: space-between;
@@ -731,10 +793,14 @@
     #cart-items .item-info { flex-grow: 1; text-align: left; }
     #cart-items .item-name { font-weight: bold; display: block; }
     #cart-items .item-qty { display: flex; align-items: center; gap: 0.5rem; }
-    #cart-items .qty-btn { cursor: pointer; font-weight: bold; }
-    #cart-items .remove-item { cursor: pointer; color: var(--accent); font-size: 1.2rem; }
-    .cart-total {
+    #cart-items .qty-btn { cursor: pointer; font-weight: bold; padding: 0 4px; }
+    #cart-items .remove-item { cursor: pointer; color: var(--accent); font-size: 1.4rem; border: none; background: none; padding: 0; line-height: 1;}
+
+    .cart-footer {
       margin-top: 1rem;
+      padding: 0 1.2rem 1.2rem 1.2rem;
+    }
+    .cart-total {
       font-weight: bold;
       font-size: 1.1rem;
       text-align: right;
@@ -747,9 +813,12 @@
       font-size: 0.85rem;
       text-align: center;
     }
-    .cart-info strong { color: var(--text); }
     .cart-info p { margin: 0.3rem 0; }
     #whatsapp-checkout { width: 100%; margin-top: 1rem; }
+    
+    /* ========================================================= */
+    /* ===== FIN: REFACTORIZACIÓN COMPLETA DEL CARRITO ======= */
+    /* ========================================================= */
     
     .imagen-principal {
       display: block;
@@ -972,7 +1041,7 @@
       text-align: center;
       font-size: 30px;
       box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
-      z-index: 1000;
+      z-index: 999;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -986,44 +1055,32 @@
     /* --- INICIO: MEDIA QUERIES PARA RESPONSIVIDAD --- */
     /* -------------------------------------------------- */
 
-    /* Para tablets y dispositivos más pequeños */
     @media (max-width: 1024px) {
-      .side-logo {
-        display: none;
-      }
+      .side-logo { display: none; }
       .posicionamiento-contenedor,
-      .contenedor-posicionamiento-absoluto {
-        display: none; /* Ocultamos el contenedor de escritorio */
-      }
+      .contenedor-posicionamiento-absoluto { display: none; }
     }
     
-    /* Para móviles */
     @media (max-width: 768px) {
-      section {
-        padding: 2.5rem 1rem;
-      }
+      section { padding: 2.5rem 1rem; }
 
       header {
         flex-wrap: wrap;
         padding: 1rem 1.5rem;
         justify-content: space-between;
       }
-      
-      .logo {
-        order: 1;
-        font-size: 1.3rem;
-      }
+      .logo { order: 1; font-size: 1.3rem; }
       .logo span { display: none; }
-      .cart-container { order: 2; margin-left: 0;}
-      .menu-toggle { order: 3; display: block; margin-left: 1rem;}
-      nav { order: 4; width: 100%; margin: 0;}
+      .cart-container { order: 2; margin-left: 0; }
+      .menu-toggle { order: 3; display: block; margin-left: 1rem; }
+      nav { order: 4; width: 100%; margin: 0; }
       
       nav ul {
         display: none;
         flex-direction: column;
         width: 100%;
         position: absolute;
-        top: 65px; /* Altura del header */
+        top: 65px;
         left: 0;
         background: var(--bg);
         padding: 1rem 0;
@@ -1078,35 +1135,68 @@
         min-height: 0;
       }
       .modal-content img { max-height: 30vh; }
-      .close { top: 8px; right: 8px; }
       
       /* ================================================= */
-      /* ===== INICIO: SOLUCIÓN CARRITO PARA CELULAR ===== */
+      /* ===== INICIO: SOLUCIÓN DEFINITIVA DEL CARRITO MÓVIL ===== */
       /* ================================================= */
+      
+      /* El fondo oscuro (Overlay) */
       .cart-overlay {
-        display: none;
+        display: flex; /* Cambiado a flex para centrar el contenido */
+        align-items: center;
+        justify-content: center;
         position: fixed;
-        inset: 0;
+        inset: 0; /* Abarca toda la pantalla */
         background-color: rgba(0, 0, 0, 0.6);
-        z-index: 9998; /* Justo debajo del carrito */
+        backdrop-filter: blur(4px);
+        z-index: 99998;
+        padding: 1rem;
+        /* Transición para aparecer suavemente */
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
       }
+      .cart-overlay.show {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      /* El panel del carrito (Modal) */
       .cart-dropdown {
-        display: none;
-        position: fixed !important; /* Usamos !important para asegurar que sobreescriba otras reglas */
-        top: 50% !important;
-        left: 50% !important;
-        transform: translate(-50%, -50%) !important;
-        width: 90vw !important;
-        max-width: 400px !important;
-        max-height: 85vh !important;
-        overflow-y: auto !important; /* Permite scroll si hay muchos items */
-        z-index: 9999; /* Máxima prioridad para estar encima de todo */
-        box-shadow: 0 10px 40px rgba(0,0,0,0.25) !important;
+        position: static; /* Ya no necesita position: fixed */
+        display: flex; /* Flexbox para la estructura interna */
+        flex-direction: column; /* Apila los elementos verticalmente */
+        width: 100%;
+        max-width: 450px;
+        max-height: 85vh; /* ALTURA MÁXIMA PARA EVITAR QUE SE CORTE */
+        background: var(--bg);
+        border-radius: 1rem;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        padding: 0; /* Padding se maneja en los hijos */
+        /* Transición para la aparición */
+        transform: scale(0.95);
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        opacity: 0;
       }
-      .cart-dropdown.show { display: block !important; }
-      .cart-overlay.show { display: block !important; }
+      .cart-overlay.show .cart-dropdown {
+        opacity: 1;
+        transform: scale(1);
+      }
+      
+      /* Partes internas del carrito móvil */
+      .cart-dropdown .cart-header,
+      .cart-dropdown .cart-footer {
+        flex-shrink: 0; /* Evita que el header y footer se encojan */
+      }
+      
+      /* ESTA ES LA CLAVE: La lista de items es la que tendrá scroll */
+      #cart-items {
+        overflow-y: auto; /* SCROLL AQUÍ */
+        flex-grow: 1; /* Ocupa el espacio disponible */
+      }
+      
       /* =============================================== */
-      /* ===== FIN: SOLUCIÓN CARRITO PARA CELULAR ====== */
+      /* ===== FIN: SOLUCIÓN DEFINITIVA DEL CARRITO MÓVIL ====== */
       /* =============================================== */
 
       .catalog-wrapper { max-width: 592px; }
@@ -1137,14 +1227,8 @@
         grid-template-columns: 1fr;
         gap: 2.5rem;
       }
-      .curso-v2-intro h1 {
-        font-size: 2.5rem;
-        text-align: center;
-      }
-      .curso-v2-intro p {
-        text-align: center;
-        font-size: 1.1rem;
-      }
+      .curso-v2-intro h1 { font-size: 2.5rem; text-align: center; }
+      .curso-v2-intro p { text-align: center; font-size: 1.1rem; }
       .curso-v2-details-grid h3 { font-size: 1.8rem; }
 
       .whatsapp-flotante { bottom: 20px; right: 20px; }
@@ -1190,22 +1274,28 @@
         <i class="fas fa-shopping-cart"></i>
         <span class="cart-count" id="cart-count">0</span>
       </div>
-      <div class="cart-overlay" onclick="toggleCart()"></div>
-      <div class="cart-dropdown" id="cart-dropdown">
-        <span class="close" onclick="toggleCart()" aria-label="Cerrar">×</span>
-        <h4>Mi Pedido</h4>
-        <ul id="cart-items"></ul>
-        <div class="cart-total">
-          Total: <span id="cart-total">0.00</span> USD
-        </div>
-        <div class="cart-info">
-            <p><strong>¿Necesitas factura?</strong> Avísale a nuestro asesor por WhatsApp.</p>
-            <p>Recuerda: para facturar se debe añadir el 15% de IVA. El asesor te dará el precio final.</p>
-            <p>¡El asesor también te compartirá los datos para el pago por transferencia o depósito!</p>
-        </div>
-        <button id="whatsapp-checkout" class="action-btn">
-          <i class="fab fa-whatsapp"></i> Comprar por WhatsApp
-        </button>
+      
+      <div class="cart-overlay" id="cart-overlay" onclick="closeCartOnClickOutside(event)">
+          <div class="cart-dropdown" id="cart-dropdown">
+            <div class="cart-header">
+              <h4>Mi Pedido</h4>
+              <button class="close" onclick="toggleCart()" aria-label="Cerrar">×</button>
+            </div>
+            <ul id="cart-items"></ul>
+            <div class="cart-footer">
+                <div class="cart-total">
+                  Total: <span id="cart-total">0.00</span> USD
+                </div>
+                <div class="cart-info">
+                    <p><strong>¿Necesitas factura?</strong> Avísale a nuestro asesor por WhatsApp.</p>
+                    <p>Recuerda: para facturar se debe añadir el 15% de IVA. El asesor te dará el precio final.</p>
+                    <p>¡El asesor también te compartirá los datos para el pago por transferencia o depósito!</p>
+                </div>
+                <button id="whatsapp-checkout" class="action-btn">
+                  <i class="fab fa-whatsapp"></i> Comprar por WhatsApp
+                </button>
+            </div>
+          </div>
       </div>
     </div>
     <div class="menu-toggle" onclick="toggleMenu()">☰</div>
@@ -1270,26 +1360,7 @@
         });
     }
 
-    // --- LÓGICA DE BLOQUEO DE PANTALLA ---
-    let scrollPosition = 0;
-    
-    function lockScreen() {
-        scrollPosition = window.pageYOffset;
-        document.body.style.overflow = 'hidden';
-        document.body.style.position = 'fixed';
-        document.body.style.top = `-${scrollPosition}px`;
-        document.body.style.width = '100%';
-    }
-
-    function unlockScreen() {
-        document.body.style.removeProperty('overflow');
-        document.body.style.removeProperty('position');
-        document.body.style.removeProperty('top');
-        document.body.style.removeProperty('width');
-        window.scrollTo(0, scrollPosition);
-    }
-
-    // --- LÓGICA MODAL ---
+    // --- LÓGICA MODAL (Para descripción de productos) ---
     function verDescripcion(img, titulo, descripcion, carpeta = "vasito", fichaTecnicaURL = null) {
       const modal = document.getElementById("modal");
       const imgWrap = document.getElementById("modalImg").parentNode;
@@ -1315,42 +1386,38 @@
       }
 
       modal.style.display = "flex";
-      lockScreen();
+      document.body.classList.add('cart-open');
       document.addEventListener("keydown", escClose);
     }
     
     function cerrarModal(e) {
       if (!e || e.target === document.getElementById("modal") || e.target.classList.contains("close")) {
         document.getElementById("modal").style.display = "none";
-        unlockScreen();
+        document.body.classList.remove('cart-open');
         document.removeEventListener("keydown", escClose);
       }
     }
     function escClose(ev) { if (ev.key === "Escape") cerrarModal(); }
     
 
-    // --- LÓGICA CARRITO DE COMPRAS ---
+    // --- LÓGICA DEL CARRITO DE COMPRAS (REFACTORIZADA) ---
     const cartDropdown = document.getElementById('cart-dropdown');
+    const cartOverlay = document.getElementById('cart-overlay');
     const cartItemsContainer = document.getElementById('cart-items');
     const cartCount = document.getElementById('cart-count');
     const cartTotal = document.getElementById('cart-total');
     const whatsappCheckoutBtn = document.getElementById('whatsapp-checkout');
-    const cartOverlay = document.querySelector('.cart-overlay');
     let cart = [];
 
     function toggleCart() {
-        const isMobile = window.innerWidth <= 768;
-        cartDropdown.classList.toggle('show');
-        
-        // La lógica del overlay y bloqueo de scroll se aplica en móvil
-        if (isMobile) {
-            const isOpening = cartDropdown.classList.contains('show');
-            cartOverlay.classList.toggle('show', isOpening);
-            if (isOpening) {
-                lockScreen();
-            } else {
-                unlockScreen();
-            }
+        const isCartOpen = cartOverlay.classList.contains('show');
+        document.body.classList.toggle('cart-open', !isCartOpen);
+        cartOverlay.classList.toggle('show');
+    }
+
+    function closeCartOnClickOutside(event) {
+        if (event.target === cartOverlay) {
+            toggleCart();
         }
     }
 
@@ -1363,14 +1430,14 @@
       }
       updateCart();
 
-      // Muestra el carrito por un momento (solo en desktop)
+      // En escritorio, muestra el carrito temporalmente
       if (window.innerWidth > 768) {
         cartDropdown.classList.add('show');
         setTimeout(() => {
           if (cartDropdown.classList.contains('show')) {
               cartDropdown.classList.remove('show');
           }
-        }, 3000);
+        }, 2500);
       }
     }
 
@@ -1396,7 +1463,7 @@
       let count = 0;
       
       if (cart.length === 0) {
-        cartItemsContainer.innerHTML = '<p style="text-align:center;padding:1rem 0;">Tu carrito está vacío.</p>';
+        cartItemsContainer.innerHTML = '<li style="text-align:center;padding:1rem 0;border:none;">Tu carrito está vacío.</li>';
       } else {
          cart.forEach(item => {
           const itemElement = document.createElement('li');
@@ -1410,7 +1477,7 @@
               <b>${item.quantity}</b>
               <span class="qty-btn" onclick="changeQuantity('${item.name}', 1)">+</span>
             </div>
-            <span class="remove-item" onclick="removeItem('${item.name}')">×</span>
+            <button class="remove-item" onclick="removeItem('${item.name}')">×</button>
           `;
           cartItemsContainer.appendChild(itemElement);
           total += item.price * item.quantity;
@@ -1691,7 +1758,7 @@
                     </div>
                   </div>
                   <div class="card">
-                    <img src="imagenes/vasito/matcha.jpg" alt="GELAMATCHA" onclick="verDescripcion('matcha.jpg','GELAMATCHA','Gracias a su alta concentración de antioxidantes, el té matcha contribuye a combatir el estrés oxidativo, favorece el metabolismo y promovemos la salud cardiovascular. ¡Un verdadero superalimento!\\n\\nIngredientes: Leche entera, Té Matcha orgánico, Limón, Panela granulada, Gelatina sin sabor y Colágeno hidrolizado. Probiótico: Kéfir de Leche.\\n\\nContenido: 125 gramos.\\n\\nPVP: 0.95 USD','vasito')">
+                    <img src="imagenes/vasito/matcha.jpg" alt="GELAMATCHA" onclick="verDescripcion('matcha.jpg','GELAMATCHA','Gracias a su alta concentración de antioxidantes, el té matcha contribuye a combatir el estrés oxidativo, favorece el metabolismo y promueve la salud cardiovascular. ¡Un verdadero superalimento!\\n\\nIngredientes: Leche entera, Té Matcha orgánico, Limón, Panela granulada, Gelatina sin sabor y Colágeno hidrolizado. Probiótico: Kéfir de Leche.\\n\\nContenido: 125 gramos.\\n\\nPVP: 0.95 USD','vasito')">
                     <div class="card-content"><h4>GELAMATCHA</h4></div>
                     <div class="card-actions">
                       <button class="btn-secondary" onclick="verDescripcion('matcha.jpg','GELAMATCHA','Gracias a su alta concentración de antioxidantes, el té matcha contribuye a combatir el estrés oxidativo, favorece el metabolismo y promueve la salud cardiovascular. ¡Un verdadero superalimento!\\n\\nIngredientes: Leche entera, Té Matcha orgánico, Limón, Panela granulada, Gelatina sin sabor y Colágeno hidrolizado. Probiótico: Kéfir de Leche.\\n\\nContenido: 125 gramos.\\n\\nPVP: 0.95 USD','vasito')">Ver más</button>
