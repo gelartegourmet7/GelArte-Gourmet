@@ -31,16 +31,10 @@
       position: relative; 
     }
     
-    /* ================================================= */
-    /* ===== INICIO: SOLUCIÓN BLOQUEO DE SCROLL ====== */
-    /* ================================================= */
     /* Clase que se añade al BODY para evitar el scroll cuando el carrito está abierto */
     body.cart-open {
       overflow: hidden;
     }
-    /* =============================================== */
-    /* ===== FIN: SOLUCIÓN BLOQUEO DE SCROLL ====== */
-    /* =============================================== */
 
     body.home-bg::before {
         content: ''; 
@@ -739,7 +733,8 @@
     }
 
 
-    /* Ocultamos el overlay en escritorio */
+    /* El overlay del carrito que se usará en móvil */
+    /* En escritorio está oculto por defecto */
     .cart-overlay {
       display: none;
     }
@@ -1162,19 +1157,17 @@
       }
 
       /* El panel del carrito (Modal) */
-      /* Usamos un selector más específico para evitar conflictos con los estilos de escritorio */
-      .cart-overlay .cart-dropdown {
-        position: static; /* Ya no necesita position: absolute */
-        display: flex; /* Flexbox para la estructura interna */
-        flex-direction: column; /* Apila los elementos verticalmente */
+      .cart-dropdown {
+        position: static;
+        display: flex;
+        flex-direction: column;
         width: 100%;
         max-width: 450px;
-        max-height: 85vh; /* ALTURA MÁXIMA PARA EVITAR QUE SE CORTE */
+        max-height: 85vh;
         background: var(--bg);
         border-radius: 1rem;
         box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-        padding: 0; /* Padding se maneja en los hijos */
-        /* Transición para la aparición */
+        padding: 0;
         transform: scale(0.95);
         transition: transform 0.3s ease, opacity 0.3s ease;
         opacity: 0;
@@ -1185,12 +1178,11 @@
       }
       
       /* Partes internas del carrito móvil */
-      .cart-overlay .cart-dropdown .cart-header,
-      .cart-overlay .cart-dropdown .cart-footer {
+      .cart-dropdown .cart-header,
+      .cart-dropdown .cart-footer {
         flex-shrink: 0; /* Evita que el header y footer se encojan */
       }
       
-      /* ESTA ES LA CLAVE: La lista de items es la que tendrá scroll */
       #cart-items {
         overflow-y: auto; /* SCROLL AQUÍ */
         flex-grow: 1; /* Ocupa el espacio disponible */
@@ -1409,6 +1401,38 @@
     const cartTotal = document.getElementById('cart-total');
     const whatsappCheckoutBtn = document.getElementById('whatsapp-checkout');
     let cart = [];
+
+    // =========================================================================
+    // ===== INICIO: NUEVA SOLUCIÓN PARA LA UBICACIÓN DEL CARRITO EN MÓVIL =====
+    // =========================================================================
+    const cartContainer = document.querySelector('.cart-container');
+    const body = document.body;
+
+    function handleCartPlacement() {
+      // Si la ventana es de tamaño móvil
+      if (window.innerWidth <= 768) {
+        // Y el carrito NO es un hijo directo del body, lo movemos allí.
+        // Esto lo "libera" del header y permite que se muestre en toda la pantalla.
+        if (cartOverlay.parentElement !== body) {
+          body.appendChild(cartOverlay);
+        }
+      } else {
+        // Si la ventana es de tamaño de escritorio
+        // Y el carrito NO está en su contenedor original, lo devolvemos.
+        // Esto asegura que funcione el dropdown de escritorio.
+        if (cartOverlay.parentElement !== cartContainer) {
+          cartContainer.appendChild(cartOverlay);
+        }
+      }
+    }
+    // Ejecutamos la función al cargar la página
+    document.addEventListener('DOMContentLoaded', handleCartPlacement);
+    // Y también cada vez que se cambie el tamaño de la ventana (ej. al girar el celular)
+    window.addEventListener('resize', handleCartPlacement);
+    // =======================================================================
+    // ===== FIN: NUEVA SOLUCIÓN PARA LA UBICACIÓN DEL CARRITO EN MÓVIL =====
+    // =======================================================================
+
 
     function toggleCart() {
         const isCartOpen = cartOverlay.classList.contains('show');
@@ -1844,7 +1868,7 @@
                     <div class="contenedor-posicionamiento-absoluto">
                         <div id="texto-p2-movible" class="texto-centrado"> 
                             <h2>MEDIANAS</h2>
-                            <p>Variadas formas. Incluye: una gelatina principal de 500 gramos que puede tener desde 1 sabor hasta 3 sabores; 10 esferas pequenas de gelatina; 90 gramos de fruta fresca; una gelatina pequena con forma de figura especial. Peso total (promedio) 650 gramos. Inlcuye contenedor de plástico desechable.</p>
+                            <p>Variadas formas. Incluye: una gelatina principal de 500 gramos que puede tener desde 1 sabor hasta 3 sabores; 10 esferas pequeñas de gelatina; 90 gramos de fruta fresca; una gelatina pequeña con forma de figura especial. Peso total (promedio) 650 gramos. Inlcuye contenedor de plástico desechable.</p>
                         </div>
                         <div id="infobox-p2-movible" class="info-box">
                             <p>Precio unitario: 9,75 USD + IVA. Pedidos con 72 horas de anticipación.</p>
@@ -1854,7 +1878,7 @@
                     <div class="decoradas-header-container">
                         <div class="texto-movible texto-centrado"> 
                             <h2>MEDIANAS</h2>
-                            <p>Variadas formas. Incluye: una gelatina principal de 500 gramos que puede tener desde 1 sabor hasta 3 sabores; 10 esferas pequenas de gelatina; 90 gramos de fruta fresca; una gelatina pequena con forma de figura especial. Peso total (promedio) 650 gramos. Inlcuye contenedor de plástico desechable.</p>
+                            <p>Variadas formas. Incluye: una gelatina principal de 500 gramos que puede tener desde 1 sabor hasta 3 sabores; 10 esferas pequeñas de gelatina; 90 gramos de fruta fresca; una gelatina pequeña con forma de figura especial. Peso total (promedio) 650 gramos. Inlcuye contenedor de plástico desechable.</p>
                         </div>
                         <div class="infobox-movible info-box">
                             <p>Precio unitario: 9,75 USD + IVA. Pedidos con 72 horas de anticipación.</p>
@@ -1883,7 +1907,7 @@
                      <div class="contenedor-posicionamiento-absoluto">
                         <div id="texto-p3-movible" class="texto-centrado"> 
                             <h2>GRANDES</h2>
-                            <p>Variadas formas. Incluye: una gelatina principal de 1500 gramos que puede tener desde 1 hasta 3 sabores; 200 gramos de esferas y cubitos de tamano mediano de gelatina; 200 gramos de fruta fresca. Peso total (promedio) 1900 gramos. Incluye contenedor de plástico desechable.</p>
+                            <p>Variadas formas. Incluye: una gelatina principal de 1500 gramos que puede tener desde 1 hasta 3 sabores; 200 gramos de esferas y cubitos de tamaño mediano de gelatina; 200 gramos de fruta fresca. Peso total (promedio) 1900 gramos. Incluye contenedor de plástico desechable.</p>
                         </div>
                         <div id="infobox-p3-movible" class="info-box">
                             <p>Precio unitario: 20,00 USD + IVA. Pedidos con 72 horas de anticipación.</p>
@@ -1893,7 +1917,7 @@
                     <div class="decoradas-header-container">
                         <div class="texto-movible texto-centrado"> 
                             <h2>GRANDES</h2>
-                            <p>Variadas formas. Incluye: una gelatina principal de 1500 gramos que puede tener desde 1 hasta 3 sabores; 200 gramos de esferas y cubitos de tamano mediano de gelatina; 200 gramos de fruta fresca. Peso total (promedio) 1900 gramos. Incluye contenedor de plástico desechable.</p>
+                            <p>Variadas formas. Incluye: una gelatina principal de 1500 gramos que puede tener desde 1 hasta 3 sabores; 200 gramos de esferas y cubitos de tamaño mediano de gelatina; 200 gramos de fruta fresca. Peso total (promedio) 1900 gramos. Incluye contenedor de plástico desechable.</p>
                         </div>
                         <div class="infobox-movible info-box">
                             <p>Precio unitario: 20,00 USD + IVA. Pedidos con 72 horas de anticipación.</p>
