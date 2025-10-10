@@ -1080,6 +1080,11 @@
         background: var(--bg);
         padding: 1rem 0;
         box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+
+        /* ▼▼▼ LÍNEAS A AÑADIR ▼▼▼ */
+    max-height: calc(100vh - 65px); /* Limita la altura a la pantalla menos el header */
+    overflow-y: auto; /* Muestra el scroll vertical SOLO si es necesario */
+    /* ▲▲▲ FIN DE LAS LÍNEAS A AÑADIR ▲▲▲ */
       }
       nav ul.show { display: flex; }
       nav ul li { text-align: center; width: 100%; }
@@ -2233,4 +2238,5 @@
   </script>
 </body>
 </html>
+
 
